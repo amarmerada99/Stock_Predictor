@@ -1,5 +1,7 @@
 import yfinance as yf
 import pandas as pd
+import streamlit as st
+import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
@@ -78,26 +80,26 @@ print("NVDA mean squared error: ", mean_squared_error(NVDA_Y_test, NVDA_Y_pred))
 print("NVDA R-squared: ", r2_score(NVDA_Y_test, NVDA_Y_pred))
 
 
-plt.figure(figsize=(10, 6))
-plt.plot(Y_test.index, Y_test, label='Actual')
-plt.plot(Y_test.index, y_pred, label='Predicted')
-plt.title('AAPL: Actual vs Predicted Price')
-plt.xlabel('Date')
-plt.ylabel('Price')
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.savefig("aapl_prediction.png")
-plt.close()
+AAPLfig, ax = plt.subplots()
+#ax.figure(figsize=(10, 6))
+ax.plot(Y_test.index, Y_test, label='Actual')
+ax.plot(Y_test.index, y_pred, label='Predicted')
+ax.set_title('AAPL: Actual vs Predicted Price')
+ax.set_xlabel('Date')
+ax.set_ylabel('Price')
+ax.legend()
+ax.grid(True)
+AAPLfig.tight_layout()
+st.pyplot(AAPLfig)
 
-plt.figure(figsize=(10, 6))
-plt.plot(NVDA_Y_test.index, NVDA_Y_test, label="Actual")
-plt.plot(NVDA_Y_test.index, NVDA_Y_pred, label="Predicted")
-plt.title("NVDA Price Prediction Using Lag Features")
-plt.xlabel("Date")
-plt.ylabel("Price")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.savefig("NVDA_prediction.png")
-plt.close()
+NVDAfig, bx = plt.subplots()
+#bx.figure(figsize=(10, 6))
+bx.plot(NVDA_Y_test.index, NVDA_Y_test, label="Actual")
+bx.plot(NVDA_Y_test.index, NVDA_Y_pred, label="Predicted")
+bx.set_title("NVDA Price Prediction Using Lag Features")
+bx.set_xlabel("Date")
+bx.set_ylabel("Price")
+bx.legend()
+bx.grid(True)
+NVDAfig.tight_layout()
+st.pyplot(NVDAfig)
